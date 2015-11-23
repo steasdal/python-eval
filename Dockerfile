@@ -6,4 +6,5 @@ COPY python-eval.py /root/python-eval/
 
 WORKDIR python-eval
 
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "python-eval:app" ]
+# CMD ["gunicorn", "-b", "0.0.0.0:5000", "python-eval:app" ]
+CMD ["python", "python-eval.py"]
