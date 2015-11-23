@@ -46,6 +46,17 @@ groups = ["admins", "users", "execs", "pirates"]
 #                  | |
 #                  |_|
 
+link_fields = {
+    'rel': fields.String,
+    'href': fields.String
+}
+
+greeting_fields = {
+    'greeting': fields.String,
+    'users': fields.Nested(link_fields),
+    'groups': fields.Nested(link_fields)
+}
+
 user_fields = {
     'userid': fields.String,
     'first_name': fields.String,
@@ -98,6 +109,31 @@ class UsersEndpoint(Resource):
 
         users.append(user)
         return {'user': marshal(user, user_fields)}, 201
+
+
+class RootEndpoint(Resource):
+
+    # Return a greeting message and some HATEOAS-style links to the users and groups endpoints
+    def get(self):
+
+        user_link = {
+            "rel": "users",
+            "href": "/users/"
+        }
+
+        group_link = {
+            "rel": "groups",
+            "href": "/groups/"
+        }
+
+        greeting = {
+            "greeting": "Welcome to the python-eval web service.",
+            "users": user_link,
+            "groups": group_link
+        }
+
+        return marshal(greeting, greeting_fields), 200
+
 
 
 class UserEndpoint(Resource):
@@ -248,6 +284,7 @@ class GroupEndpoint(Resource):
         return {"result": "Group '{}' successfully deleted".format(groupname)}, 200
 
 
+api.add_resource(RootEndpoint, '/', endpoint='root')
 api.add_resource(UsersEndpoint, '/users/', endpoint ='users')
 api.add_resource(UserEndpoint, '/users/<userid>', endpoint ='user')
 api.add_resource(GroupsEndpoint, '/groups/', endpoint ='groups')
@@ -314,4 +351,4 @@ def removeGroup(user, group):
 #       |_|   |_|
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', debug=True)
