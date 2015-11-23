@@ -41,8 +41,8 @@ The app is hosted on AWS and available at the following URL:
 
 You might want to start with these endpoints:
 
-Users:  <http://ec2-54-175-118-93.compute-1.amazonaws.com:5000/users>
-Groups:  <http://ec2-54-175-118-93.compute-1.amazonaws.com:5000/groups>
+   * Users:  <http://ec2-54-175-118-93.compute-1.amazonaws.com:5000/users>
+   * Groups:  <http://ec2-54-175-118-93.compute-1.amazonaws.com:5000/groups>
 
 
 
