@@ -34,7 +34,15 @@ docker installed, you can run the image with the following command:
     
 This image will, once pulled and running, start the python-eval app with python on port 5000.
 
+### Accessing the hosted app
+The app is hosted on AWS and available at the following URL:
 
+<http://ec2-54-175-118-93.compute-1.amazonaws.com:5000/users/>
+
+You might want to start with these endpoints:
+
+Users:  <http://ec2-54-175-118-93.compute-1.amazonaws.com:5000/users>
+Groups:  <http://ec2-54-175-118-93.compute-1.amazonaws.com:5000/groups>
 
 
 
