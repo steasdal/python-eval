@@ -37,7 +37,7 @@ This image will, once pulled and running, start the python-eval app with python 
 ### Accessing the hosted app
 The app is hosted on AWS and available at the following URL:
 
-<http://ec2-54-175-118-93.compute-1.amazonaws.com:5000/users/>
+<http://ec2-54-175-118-93.compute-1.amazonaws.com:5000>
 
 You might want to start with these endpoints:
 
