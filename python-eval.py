@@ -73,6 +73,31 @@ group_list_fields = {
     'groups': fields.List(fields.String)
 }
 
+
+class RootEndpoint(Resource):
+
+    # Return a greeting message and some HATEOAS-style links to the users and groups endpoints
+    def get(self):
+
+        user_link = {
+            "rel": "users",
+            "href": "/users/"
+        }
+
+        group_link = {
+            "rel": "groups",
+            "href": "/groups/"
+        }
+
+        greeting = {
+            "greeting": "Welcome to the python-eval web service.",
+            "users": user_link,
+            "groups": group_link
+        }
+
+        return marshal(greeting, greeting_fields), 200
+
+
 class UsersEndpoint(Resource):
 
     def __init__(self):
@@ -109,30 +134,6 @@ class UsersEndpoint(Resource):
 
         users.append(user)
         return {'user': marshal(user, user_fields)}, 201
-
-
-class RootEndpoint(Resource):
-
-    # Return a greeting message and some HATEOAS-style links to the users and groups endpoints
-    def get(self):
-
-        user_link = {
-            "rel": "users",
-            "href": "/users/"
-        }
-
-        group_link = {
-            "rel": "groups",
-            "href": "/groups/"
-        }
-
-        greeting = {
-            "greeting": "Welcome to the python-eval web service.",
-            "users": user_link,
-            "groups": group_link
-        }
-
-        return marshal(greeting, greeting_fields), 200
 
 
 

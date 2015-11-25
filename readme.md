@@ -17,8 +17,12 @@ To run this app with python, you'll need to install the following packages via p
    * flask
    * flask-restful
    
-Clone this repo and `cd` into the directory where you've cloned it.  Run `python python-eval.py` 
+Clone this repo, `cd` into the directory where you've cloned it and run Python thusly:
+
+    python python-eval.py
+
 and point your browser to <http://localhost:5000>
+
 
 ### Running with the `run-py3` script
 If you've got Docker installed, feel free to try the `run-py3` bash script.  This script will 
@@ -44,6 +48,15 @@ You might want to start with these endpoints:
    * Users:  <http://ec2-54-175-118-93.compute-1.amazonaws.com:5000/users>
    * Groups:  <http://ec2-54-175-118-93.compute-1.amazonaws.com:5000/groups>
 
+## Testing the application
 
+### Testing with pytest
+All tests are designed to be run with **pytest** which you'll need to install
+via pip.  With pytest installed, run all tests with the following command:
 
-
+    py.test
+    
+### Testing with the `test-py3` script
+If you've got Docker installed, try running the `test-py3` script.  This'll pull
+a docker image with a properly configured Python 3.5.0 environment with pytest
+already installed and run the py.test command to kick off all discoverable tests.
