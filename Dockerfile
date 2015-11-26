@@ -3,6 +3,7 @@ FROM steasdal/python3-dev
 MAINTAINER Sam Teasdale <samuel.teasdale@gmail.com>
 
 COPY python-eval.py /root/python-eval/
+COPY database /root/python-eval/database
 
 WORKDIR python-eval
 
