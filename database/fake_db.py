@@ -85,6 +85,9 @@ class Group:
     def __init__(self, name):
         self.name = name
 
+def allGroups():
+    return groups
+
 # Return true if a group already exists with this group name
 def groupNameExists(group_name):
     group_list = [group for group in groups if group.name == group_name]
@@ -99,7 +102,7 @@ def addGroupByName(new_group_name):
 
 def addGroup(new_group):
     if groupNameExists(new_group.name):
-        raise ValueError("group with name '{}' already exists")
+        raise ValueError("group with name '{}' already exists".format(new_group.name))
 
     groups.append(new_group)
 
@@ -122,6 +125,11 @@ def removeGroup(group):
 
     groups.remove(group)
     [removeGroupFromUser(user, group) for user in users]
+
+# Return a list of userids for all users
+# that are members of this group.
+def getUserIdsForGroup(group):
+    return [user.userid for user in users if group in user.groups]
 
 # Pass in a group and a list of userid strings
 def updateGroupMembership(group, userids):

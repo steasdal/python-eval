@@ -266,6 +266,19 @@ class TestFakeDbGroups():
         with pytest.raises(LookupError):
             db.removeGroup(db.Group("ppoijpaoij9a8us9d8pjasdf"))
 
+    # Verify that getUserIdsForGroup only returns userids for a particular group.
+    def test_getUserIdsForGroup(self):
+        new_group = db.Group("particularly_sweet_group")
+        db.addGroup(new_group)
+
+        db.addUser(db.User("u025", "aaa", "aaa", [new_group]))
+        db.addUser(db.User("u026", "bbb", "bbb", [new_group]))
+        db.addUser(db.User("u027", "ccc", "ccc", [db.getGroupByName("admins")]))
+
+        for userid in db.getUserIdsForGroup(new_group):
+            assert userid in ["u025", "u026"]
+            assert userid not in ["u027"]
+
     # Verify that updateGroupMembership does that thing it's supposed to do.
     def test_updateGroupMembership(self):
         new_group = db.Group("even_sweeter_new_group")
