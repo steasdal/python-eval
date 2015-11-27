@@ -48,6 +48,10 @@ You might want to start with these endpoints:
    * Users:  <http://ec2-54-175-118-93.compute-1.amazonaws.com:5000/users>
    * Groups:  <http://ec2-54-175-118-93.compute-1.amazonaws.com:5000/groups>
 
+Your first request may take a few seconds to execute if the web service hasn't
+been accessed in a while (which is quite likely).  All subsequent requests, however,
+should be nice 'n fast once the web service has spun up and shaken off the cobwebs.
+
 ## Testing the application
 All tests are run by pytest during [the build](https://travis-ci.org/steasdal/python-eval).
 
