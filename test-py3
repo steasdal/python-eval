@@ -3,4 +3,4 @@
 docker run -it --rm \
     -p 5000:5000 \
     -v $PWD:/root/python-eval \
-    steasdal/python3-dev py.test
+    steasdal/python3-dev py.test -s
