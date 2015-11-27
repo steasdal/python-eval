@@ -5,6 +5,10 @@ services:
 
 script:
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+
+  - docker pull steasdal/python3-dev
+  - docker run -it --rm -v $PWD:/root/python-eval steasdal/python3-dev py.test
+
   - docker build -t steasdal/python-eval .
   - docker push steasdal/python-eval
   - docker images
