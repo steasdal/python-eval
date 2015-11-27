@@ -1,5 +1,13 @@
 # Python Code Evaluation
-This project attempts to meet the requirements of a Planet Labs Python/Flask "Take Home Code Test".
+This project attempts to address the requirements of a [Planet Labs](https://www.planet.com/) 
+Python/Flask "Take Home Code Test".
+
+## Project Structure
+This project is structured as follows:
+
+   * **Main app/Contollers** - The main app and the web service endpoint contollers are in `python-eval.py`
+   * **Database** - You'll find a fake database layer and bootstrap data in `database/fake_db.py`
+   * **Tests** - Tests are in the `tests/` directory.
 
 #### Build
 This Docker image is built in Travis CI:
