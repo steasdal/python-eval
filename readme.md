@@ -49,10 +49,12 @@ You might want to start with these endpoints:
    * Groups:  <http://ec2-54-175-118-93.compute-1.amazonaws.com:5000/groups>
 
 ## Testing the application
+All tests are run by pytest during [the build](https://travis-ci.org/steasdal/python-eval).
 
 ### Testing with pytest
-All tests are designed to be run with **pytest** which you'll need to install
-via pip.  With pytest installed, run all tests with the following command:
+The test suite is designed to be run with **pytest** which you'll need to install
+via pip.  With pytest installed, run all tests by executing the following command
+from the project's root directory:
 
     py.test
     
@@ -60,3 +62,102 @@ via pip.  With pytest installed, run all tests with the following command:
 If you've got Docker installed, try running the `test-py3` script.  This'll pull
 a docker image with a properly configured Python 3.5.0 environment with pytest
 already installed and run the py.test command to kick off all discoverable tests.
+
+## Endpoints
+This web services provides the following endpoints for your perusal and enjoyment.
+All responses are JSON.  POSTs and PUTs require a `Content-Type` header set to `application/json`
+
+    GET /
+        The root endpoint.  This'll return a greeting and some 
+        HATEOAS style links for the `users` and `groups` endpoints.
+
+    GET /users/
+        Returns user records for all users.
+        
+    POST /users/
+        Create a new user.  Set the Content-Type header to application/json.  
+        The POST body will need to be in the following format:
+
+        {
+            "userid": "hsolo",
+            "first_name": "Han",
+            "last_name": "Solo",            
+            "groups": ["users", "pirates"]
+        }
+        
+        Possible errors:
+            400 - One or more groups are invalid (do not currently exist)
+            409 - you've attempted to create a user with an existing userid
+
+    GET /users/<userid>
+        Returns the user record for a particular user.
+        
+        Possible errors:
+            404 - Unable to find user with this userid
+           
+    PUT /users/<userid>
+        Update the user record for a particular user.  The body of the PUT request
+        will be identical to the body for the /users/ POST request less the userid.  
+        Set the Content-Type header to application/json.
+        
+        {
+            "first_name": "Juan",
+            "last_name": "Yolo",            
+            "groups": ["users", "execs", "pirates"]
+        }
+        
+        Possible errors:
+            400 - One or more groups are invalid (do not currently exist)
+            404 - Unable to find a user with this userid
+        
+    DELETE /users/<userid>
+        Delete a user record for a user.
+        
+        Possible errors:
+            404 - Unable to find a user with this userid
+            
+    GET /groups/
+        Retrieve a list of all groups
+        
+    POST /groups/
+        Create a new group record.  Set the Content-Type header to application/json.
+        The body of the request will need to be in the following format:
+        
+        {
+            "name": "scoundrels"
+        }
+       
+        Possible errors:
+            409 - A group with this name already exists.
+            
+    GET /groups/<group name>
+        Return a list of userids for all users that are members of this group.
+        
+        Possible errors:
+            404 - Unable to find a group with this group name
+            
+    PUT /groups/<group name>
+        Update group membership.  Set the Content-Type header to application/json.
+        The body of this PUT will be a list of userids that will, if this PUT is
+        successful, now be members of this particular group.  The format of the
+        PUT body will be formatted thusly:
+        
+        {
+            "userids": [ 
+                "jsmith", 
+                "jjones", 
+                "kwilliams"
+            ]
+        }
+        
+        Possible errors:
+            404 - A group with this group name does not exist 
+                  or one or more of the userids do not exist
+                  
+    DELETE /groups/<group name>
+        Delete a group.  This will update group membership for all users that
+        are currently members of this group.
+        
+        Possible errors:
+            404 - A group with this group name does not exist
+    
