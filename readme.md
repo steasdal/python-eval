@@ -52,7 +52,7 @@ You might want to start with these endpoints:
 All tests are run by pytest during [the build](https://travis-ci.org/steasdal/python-eval).
 
 ### Testing with pytest
-The test suitee is designed to be run with **pytest** which you'll need to install
+The test suite is designed to be run with **pytest** which you'll need to install
 via pip.  With pytest installed, run all tests by executing the following command
 from the project's root directory:
 
