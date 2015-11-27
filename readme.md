@@ -9,10 +9,10 @@ This Docker image is built in Travis CI:
 ... and deployed to Docker Hub:
 <https://hub.docker.com/r/steasdal/python-eval/>
 
-## Running the application
+## Running the web service
 
 ### Running with Python
-To run this app with python, you'll need to install the following packages via pip:
+To run this web service with python, you'll need to install the following packages via pip:
 
    * flask
    * flask-restful
@@ -30,16 +30,16 @@ pull a docker image with a preconfigured Python 3.5.0 environment, expose port 5
 current directory to a volume on the docker image and start the python-eval.py app with Python.
 
 ### Running the docker image
-Perhaps the simplest method of running this application is to pull and run the docker image.
-This app is rolled into a Docker image which is hosted on the official Docker Hub.  If you've got
-docker installed, you can run the image with the following command:
+Perhaps the simplest method of running this web service is to pull and run the docker image.
+This web service is rolled into a Docker image which is hosted on the official Docker Hub.  
+If you've got docker installed, you can run the image with the following command:
 
     docker run -p 5000:5000 -d steasdal/python-eval
     
-This image will, once pulled and running, start the python-eval app with python on port 5000.
+This image will, once pulled and running, start the python-eval web service with python on port 5000.
 
-### Accessing the hosted app
-The app is hosted on AWS and available at the following URL:
+### Accessing the hosted web service
+Even simpler yet, this web service is hosted on AWS and available at the following URL:
 
 <http://ec2-54-175-118-93.compute-1.amazonaws.com:5000>
 
@@ -52,7 +52,7 @@ Your first request may take a few seconds to execute if the web service hasn't
 been accessed in a while (which is quite likely).  All subsequent requests, however,
 should be nice 'n fast once the web service has spun up and shaken off the cobwebs.
 
-## Testing the application
+## Testing the web service
 All tests are run by pytest during [the build](https://travis-ci.org/steasdal/python-eval).
 
 ### Testing with pytest
